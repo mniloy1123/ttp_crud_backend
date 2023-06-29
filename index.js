@@ -1,9 +1,17 @@
-const { Pool } = require("pg");
-//sending our credentials to the db
-const pool = new Pool({
-    host:'localhost',
-    port: 5432,
-    database: "crudbackend",
-    user: "mahatirniloy",
-    password: "",
-})
+const express = require("express");
+const app = express();
+const PORT = "8080";
+
+//Mount on API
+app.use("/api", require("./api"));
+
+const serverRun = () => {
+  app.listen(PORT, () => {
+    console.log(`Live on port: ${PORT}`);
+  });
+};
+
+
+serverRun();
+
+module.exports = app;
