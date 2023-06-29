@@ -6,7 +6,7 @@ const PORT = "8080";
 //Mount on API
 app.use("/api", require("./api"));
 
-const syncDB = () => db.synDB();
+const syncDB = () => db.sync();
 
 const serverRun = () => {
   app.listen(PORT, () => {
