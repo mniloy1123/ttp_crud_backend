@@ -6,19 +6,19 @@ const seedCampuses = [
     name: "Campus A",
     address: "Address A",
     description: "Description A",
-    imageUrl: "http://example.com/imageA.jpg",
+    imageUrl: "https://www.ccny.cuny.edu/sites/default/files/2020-08/princeton_review_arwu_rankings_2021.jpg",
   },
   {
     name: "Campus B",
     address: "Address B",
     description: "Description B",
-    imageUrl: "http://example.com/imageB.jpg",
+    imageUrl: "https://www.brooklyn.cuny.edu/web/com_socialImages/BrooklynCollegeLibrary_1200x628.jpg",
   },
   {
     name: "Campus C",
     address: "Address C",
     description: "Description C",
-    imageUrl: "http://example.com/imageC.jpg",
+    imageUrl: "https://qns.com/wp-content/uploads/2020/11/twitter_sm-07.png",
   },
 ];
 const seed = async () => {
