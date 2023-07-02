@@ -15,4 +15,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/", async (req, res, next) => {
+  try {
+    const newCampus = await Campuses.create(req.body);
+    res.status(201).json(newCampus);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

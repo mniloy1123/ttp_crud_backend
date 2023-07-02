@@ -6,6 +6,10 @@ const cors = require('cors');
 
 app.use(cors());
 
+//Parse JSON bodies
+app.use(express.json());
+
+
 //Mount on API
 app.use("/api", require("./api"));
 
