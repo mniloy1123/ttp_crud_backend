@@ -17,15 +17,35 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   let { name, imageUrl, address, description } = req.body;
-    
+
   // If imageUrl is an empty string, set it to undefined
   //so that the default image url will be used
-  if (imageUrl === '') {
+  if (imageUrl === "") {
     imageUrl = undefined;
   }
   try {
-    const newCampus = await Campuses.create({name, imageUrl, address, description});
+    const newCampus = await Campuses.create({
+      name,
+      imageUrl,
+      address,
+      description,
+    });
     res.status(201).json(newCampus);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const campus = await Campuses.findByPk(req.params.id);
+
+    if (!campus) {
+      return res.status(404).send("Campus Not Found");
+    }
+
+    await campus.destroy();
+    res.status(204).send("Campus Deleted");
   } catch (error) {
     next(error);
   }
