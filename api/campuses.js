@@ -15,6 +15,18 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async(req, res, next) => {
+  try {
+    const campus = await Campuses.findByPk(req.params.id);
+    if (!campus) {
+      return res.status(404).send('Campus Not Found');
+    }
+    res.json(campus);
+  } catch (error) {
+    next(error);
+  }
+})
+
 router.post("/", async (req, res, next) => {
   let { name, imageUrl, address, description } = req.body;
 
