@@ -9,7 +9,7 @@ const Campuses = db.define("campuses", {
   imageUrl: {
     type: DataTypes.STRING,
     defaultValue:
-      "https://www.brooklyn.cuny.edu/web/com_socialImages/BrooklynCollegeLibrary_1200x628.jpg",
+      "https://hips.hearstapps.com/hmg-prod/images/berry-college-historic-campus-at-twilight-royalty-free-image-1652127954.jpg?crop=1.00xw:0.752xh;0.00160xw,0.120xh&resize=1200:*",
   },
   address: {
     type: DataTypes.STRING,
