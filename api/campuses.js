@@ -16,8 +16,15 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
+  let { name, imageUrl, address, description } = req.body;
+    
+  // If imageUrl is an empty string, set it to undefined
+  //so that the default image url will be used
+  if (imageUrl === '') {
+    imageUrl = undefined;
+  }
   try {
-    const newCampus = await Campuses.create(req.body);
+    const newCampus = await Campuses.create({name, imageUrl, address, description});
     res.status(201).json(newCampus);
   } catch (error) {
     next(error);
