@@ -15,4 +15,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const student = await Students.findByPk(req.params.id)
+    
+    if (!student) {
+      return res.status(404).send('Student Not Found');
+    }
+    
+    res.json(student);
+  } catch (error) {
+    next(error);
+  }
+})
+
+
 module.exports = router;
