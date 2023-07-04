@@ -70,6 +70,22 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async(req, res, next) => {
+  try {
+    const campus = await Campuses.findByPk(req.params.id);
+
+    if (!campus) {
+      return res.status(404).send("Campus Not Found");
+    }
+
+    await campus.update(req.body);
+  } catch (error) {
+    next(error);
+    
+  }
+})
+
+
 router.delete("/:id", async (req, res, next) => {
   try {
     const campus = await Campuses.findByPk(req.params.id);
