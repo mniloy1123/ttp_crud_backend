@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Campuses } = require("../db/models/");
+const { Campuses, Students } = require("../db/models/");
 
 //Root here is localhost:8080/api/campuses/
 router.get("/", async (req, res, next) => {
@@ -15,17 +15,39 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async(req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const campus = await Campuses.findByPk(req.params.id);
+    const campus = await Campuses.findByPk(req.params.id, {
+      include: [Students] 
+    });
+    
     if (!campus) {
       return res.status(404).send('Campus Not Found');
     }
+    
     res.json(campus);
   } catch (error) {
     next(error);
   }
 })
+
+router.get("/:id/students", async (req, res, next) => {
+  try {
+    const students = await Students.findAll({
+      where: {
+        campusId: req.params.id,
+      },
+    });
+
+    if (!students) {
+      return res.status(404).send("Students Not Found");
+    }
+
+    res.json(students);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post("/", async (req, res, next) => {
   let { name, imageUrl, address, description } = req.body;
