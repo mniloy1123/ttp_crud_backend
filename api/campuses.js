@@ -78,7 +78,8 @@ router.put("/:id", async(req, res, next) => {
       return res.status(404).send("Campus Not Found");
     }
 
-    await campus.update(req.body);
+    const updatedCampus = await campus.update(req.body);
+    res.status(200).json(updatedCampus);
   } catch (error) {
     next(error);
     
