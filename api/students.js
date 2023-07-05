@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { Students } = require("../db/models");
+const { Students, Campuses } = require("../db/models");
 
 //Root here is localhost:8080/api/students/
 router.get("/", async (req, res, next) => {
   try {
-    const allStudents = await Students.findAll();
+    const allStudents = await Students.findAll({
+      include: Campuses
+    });
 
     allStudents
       ? res.status(200).json(allStudents)
@@ -17,7 +19,9 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const student = await Students.findByPk(req.params.id)
+    const student = await Students.findByPk(req.params.id, {
+      include: Campuses
+    });
     
     if (!student) {
       return res.status(404).send('Student Not Found');
