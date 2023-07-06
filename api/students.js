@@ -64,5 +64,27 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+router.post("/", async (req, res, next) => {
+  let { firstName, lastName, email, imageUrl, gpa } = req.body;
+
+  // If imageUrl is an empty string, set it to undefined
+  //so that the default image url will be used
+  if (imageUrl === "") {
+    imageUrl = undefined;
+  }
+  try {
+    const newStudent = await Students.create({
+      firstName,
+      lastName,
+      email,
+      imageUrl,
+      gpa
+    });
+    res.status(201).json(newStudent);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 module.exports = router;
