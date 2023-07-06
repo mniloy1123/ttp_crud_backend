@@ -6,7 +6,7 @@ const { Students, Campuses } = require("../db/models");
 router.get("/", async (req, res, next) => {
   try {
     const allStudents = await Students.findAll({
-      include: Campuses
+      include: Campuses,
     });
 
     allStudents
@@ -20,20 +20,20 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const student = await Students.findByPk(req.params.id, {
-      include: Campuses
+      include: Campuses,
     });
-    
+
     if (!student) {
-      return res.status(404).send('Student Not Found');
+      return res.status(404).send("Student Not Found");
     }
-    
+
     res.json(student);
   } catch (error) {
     next(error);
   }
-})
+});
 
-router.put("/:id", async(req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const student = await Students.findByPk(req.params.id);
 
@@ -45,9 +45,8 @@ router.put("/:id", async(req, res, next) => {
     res.status(200).json(updatedStudent);
   } catch (error) {
     next(error);
-    
   }
-})
+});
 
 router.delete("/:id", async (req, res, next) => {
   try {
@@ -66,10 +65,13 @@ router.delete("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   let { firstName, lastName, email, imageUrl, gpa } = req.body;
-
-  // If imageUrl is an empty string, set it to undefined
-  //so that the default image url will be used
-  if (imageUrl === "") {
+  // Check if the imageUrl is valid
+  try {
+    const response = await axios.get(imageUrl);
+    if (response.status !== 200) {
+      imageUrl = undefined;
+    }
+  } catch (error) {
     imageUrl = undefined;
   }
   try {
@@ -78,13 +80,12 @@ router.post("/", async (req, res, next) => {
       lastName,
       email,
       imageUrl,
-      gpa
+      gpa,
     });
     res.status(201).json(newStudent);
   } catch (error) {
     next(error);
   }
 });
-
 
 module.exports = router;

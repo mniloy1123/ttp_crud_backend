@@ -20,7 +20,7 @@ const Students = db.define("students", {
   imageUrl: {
     type: DataTypes.STRING,
     defaultValue:
-      "https://media.istockphoto.com/id/1340766096/photo/beautiful-smiling-female-college-student.jpg?s=612x612&w=0&k=20&c=phSOH_VAm5fszVSnxnPbSjlbne0SpUXRv2VlyrdSihQ=",
+      "https://img.freepik.com/free-vector/learning-concept-illustration_114360-3896.jpg?w=996&t=st=1688664521~exp=1688665121~hmac=3332f42229dace6f29b796de590b9907aa7e613acc8fa8edded2535d2bf1d898",
   },
   gpa: {
     type: DataTypes.DECIMAL(2, 1), 
