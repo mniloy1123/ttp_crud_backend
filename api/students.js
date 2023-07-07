@@ -40,6 +40,7 @@ router.put("/:id", async (req, res, next) => {
     if (!student) {
       return res.status(404).send("Student Not Found");
     }
+    console.log(req.body);
 
     const updatedStudent = await student.update(req.body);
     res.status(200).json(updatedStudent);
@@ -66,14 +67,6 @@ router.delete("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   let { firstName, lastName, email, imageUrl, gpa } = req.body;
   // Check if the imageUrl is valid
-  try {
-    const response = await axios.get(imageUrl);
-    if (response.status !== 200) {
-      imageUrl = undefined;
-    }
-  } catch (error) {
-    imageUrl = undefined;
-  }
   try {
     const newStudent = await Students.create({
       firstName,
