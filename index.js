@@ -4,7 +4,7 @@ const db = require("./db");
 const app = express();
 const PORT = "8080";
 
-
+app.use(require('cors')())
 //Parse JSON bodies
 app.use(express.json());
 
